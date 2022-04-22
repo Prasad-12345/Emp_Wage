@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 /*
  * Author: Prasad
- * Store the daily wage along with total wage
+ * Ability to get the total wage when queried by cpmpany
  */
 public class EmpWageBuilderList implements IEmpWageBuilder {
 	//constants
@@ -14,6 +14,7 @@ public class EmpWageBuilderList implements IEmpWageBuilder {
 	//list
 	private ArrayList<CompanyEmpWage> list;
 	private ArrayList<Integer> dailyWage;
+	//created hass map
 	private HashMap<String, ArrayList> companyDailyWage;
 	
 	//constructor
