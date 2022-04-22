@@ -1,9 +1,10 @@
 package lp1emplwagecomputation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 /*
  * Author: Prasad
- * Refactor to have a list multiple companies to manage employee wage
+ * Store the daily wage along with total wage
  */
 public class EmpWageBuilderList implements IEmpWageBuilder {
 	//constants
@@ -12,10 +13,14 @@ public class EmpWageBuilderList implements IEmpWageBuilder {
 	
 	//list
 	private ArrayList<CompanyEmpWage> list;
+	private ArrayList<Integer> dailyWage;
+	private HashMap<String, ArrayList> companyDailyWage;
 	
 	//constructor
 	public EmpWageBuilderList() {
 		list = new ArrayList<CompanyEmpWage>();
+		dailyWage = new ArrayList<Integer>();
+		companyDailyWage = new HashMap<>();
 	}
 	
 	/*
@@ -60,15 +65,19 @@ public class EmpWageBuilderList implements IEmpWageBuilder {
 				empHrs = 0;
 				break;
 			}
-			totalEmpHrs+= empHrs;			
+			totalEmpHrs+= empHrs;
+			dailyWage.add(empHrs*companyEmpWage.empRatePerHour);
 		}
-		return totalEmpHrs * companyEmpWage.empRatePerHour;
+		companyDailyWage.put(companyEmpWage.company, dailyWage);
+		System.out.println("Daily wage for the" + companyEmpWage.company + "is" + " " + dailyWage);
+		return (totalEmpHrs * companyEmpWage.empRatePerHour);
 	}
 
 	public static void main(String[] args) {
+		//object
 		EmpWageBuilderList empWageBuilderList = new EmpWageBuilderList();
 		empWageBuilderList.addCompanyEmpWage("Dmart", 25, 20, 100);
-		empWageBuilderList.addCompanyEmpWage("Reliance", 22, 21, 110);	
+		empWageBuilderList.addCompanyEmpWage("Reliance", 25, 20, 100);	
 		empWageBuilderList.computeEmpWage();
 	}
 }
