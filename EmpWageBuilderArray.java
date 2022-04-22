@@ -1,9 +1,9 @@
 package lp1emplwagecomputation;
 /*
  * Author: Prasad
- * Ability to manage employee wage of multiple company 
+ * Ability to manage employee wage of multiple companies using interface approach
  */
-public class EmpWageBuilderArray {
+public class EmpWageBuilderArray implements IEmpWageBuilder {
 	//constants
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
@@ -20,9 +20,10 @@ public class EmpWageBuilderArray {
 	}
 	
 	/*
-	 * addCompanyEmpWage mathod to create different company
+	 * addCompanyEmpWage method to create different company
 	 */
-	private void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHrsPerMonth) {
+	@Override
+	public void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHrsPerMonth) {
 		empWageBuilderArray[numOfCompany] = new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHrsPerMonth);
 		numOfCompany++;
 	}
@@ -30,7 +31,8 @@ public class EmpWageBuilderArray {
 	/*
 	 * computeEmpWage method to save the total employee wage of company in array
 	 */
-	private void computeEmpWage() {
+	@Override
+	public void computeEmpWage() {
 		for(int i = 0;i < numOfCompany; i++) {
 			empWageBuilderArray[i].setTotalEmpWage(this.computeEmpWage(empWageBuilderArray[i]));
 			System.out.println(empWageBuilderArray[i]);
@@ -76,3 +78,4 @@ public class EmpWageBuilderArray {
 		empWageBuilder.computeEmpWage();
 	}
 }
+
